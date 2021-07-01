@@ -69,7 +69,7 @@ def update_final_state_file(endpoint):
 
     last_updated_staging_item = get_state_item(endpoint, 'last_updated_staging')
 
-    with open('state.json', 'w+') as state_file:
+    with open('tap-github/state.json', 'w+') as state_file:
         state_items["bookmarks"][endpoint]['last_updated_final'] = last_updated_date_added_1_second(last_updated_staging_item)
         state_file.write(json.dumps(state_items))
 
@@ -87,7 +87,7 @@ def update_staging_state_file(endpoint, row_data):
 
     if last_updated in row_data:
         if row_data[last_updated] > get_state_item(endpoint, "last_updated_staging"):
-            with open('state.json', 'w+') as state_file:
+            with open('tap-github/state.json', 'w+') as state_file:
                 state_items["bookmarks"][endpoint]['last_updated_staging'] = row_data[last_updated]
                 state_file.write(json.dumps(state_items))
 
