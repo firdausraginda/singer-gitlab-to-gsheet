@@ -1,8 +1,11 @@
 {
-    "base_api_url": "https://api.github.com",
+    "base_api_url": "<base_api_url>",
     "username": "<username>",
     "access_token": "<access_token>",
-    "my_client_id": "<client_id>",
-    "my_client_secret": "client_secret",
-    "is_initial_extraction": true
+    "my_client_id": "<my_client_id>",
+    "my_client_secret": "<my_client_secret>",
+    "is_initial_extraction": "<is_initial_extraction>",
+
+    "spreadsheet_id": "<spreadsheet_id>",
+    "active_sheet": "<active_sheet>"
 }

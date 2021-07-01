@@ -1,21 +1,21 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from src.config import get_config_item
 import time
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name(
     './target-gsheet/client_secret.json', scope)
-spreadsheet_id = '1cB_puQw2rz5rQZcCmNfF-gPDkQ7Hwi3Yb2KSLwixeRA'
 client = gspread.authorize(creds)
 
 # get the instance of the Spreadsheet
-worksheet = client.open_by_key(spreadsheet_id)
+worksheet = client.open_by_key(get_config_item('spreadsheet_id'))
 
-def write_to_spreadsheet(data, status=True, active_sheet='Sheet1'):
+def write_to_spreadsheet(data, status=True):
     
     # get the active sheet
-    sheet = worksheet.worksheet(active_sheet)
+    sheet = worksheet.worksheet(get_config_item('active_sheet'))
 
     active_row = len(sheet.get_all_values())+1
 
