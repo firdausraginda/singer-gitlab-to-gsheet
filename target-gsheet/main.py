@@ -3,7 +3,7 @@ import io
 import json
 import singer
 from jsonschema.validators import Draft4Validator
-from gsheet_access import write_to_spreadsheet
+from src.gsheet_access import write_to_spreadsheet
 
 logger = singer.get_logger()
 
