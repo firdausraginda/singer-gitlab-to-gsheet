@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+singer-python = "*"
+gspread = "*"
+google-api-python-client = "*"
+oauth2client = "*"
+google-auth-httplib2 = "*"
+google-auth-oauthlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
