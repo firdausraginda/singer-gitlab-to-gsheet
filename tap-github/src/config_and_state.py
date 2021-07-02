@@ -3,6 +3,7 @@ import sys
 import json
 from datetime import datetime
 from datetime import timedelta
+import os
 
 
 def last_updated_date_added_1_second(RFC3339_format):
@@ -67,10 +68,14 @@ def update_final_state_file(endpoint):
     # retrieve state items from state.json
     _, state_items = access_config_and_state()
 
-    last_updated_staging_item = get_state_item(endpoint, 'last_updated_staging')
+    last_updated_staging_item = get_state_item(
+        endpoint, 'last_updated_staging')
 
-    with open('tap-github/state.json', 'w+') as state_file:
-        state_items["bookmarks"][endpoint]['last_updated_final'] = last_updated_date_added_1_second(last_updated_staging_item)
+    path_to_state = os.path.join(os.path.dirname(__file__), '../state.json')
+
+    with open(path_to_state, 'w+') as state_file:
+        state_items["bookmarks"][endpoint]['last_updated_final'] = last_updated_date_added_1_second(
+            last_updated_staging_item)
         state_file.write(json.dumps(state_items))
 
     return None
@@ -85,9 +90,11 @@ def update_staging_state_file(endpoint, row_data):
     # retrieve last_updated attribute name for selected endpoint
     last_updated = get_last_updated_attribute(endpoint)
 
+    path_to_state = os.path.join(os.path.dirname(__file__), '../state.json')
+
     if last_updated in row_data:
         if row_data[last_updated] > get_state_item(endpoint, "last_updated_staging"):
-            with open('tap-github/state.json', 'w+') as state_file:
+            with open(path_to_state, 'w+') as state_file:
                 state_items["bookmarks"][endpoint]['last_updated_staging'] = row_data[last_updated]
                 state_file.write(json.dumps(state_items))
 
